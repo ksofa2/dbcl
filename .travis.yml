@@ -14,7 +14,7 @@ before_script:
 script:
   - coverage run --source=dbcl -m pytest -v
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT --debug
 notifications:
   slack:
     secure: N8DefnqbMqvRw7FJtQa4BEBeSt3SP6Z38kzQ9/V2z6Q/Sj04bdBrCH9xrAmRzquUOpkj8ONTf5Y+kYenenFQeVlW1Qx2KDHkKZedn2FZ4mC5FHhuf7nM7Ha5YGxsXff2hKZfvbXtXoT3EuIOn/3uC/POLDu80ttNOBNYgDizzoExr516CgU1+b5pbXyGTF4CROxdRWs1XU5iWigDqQsAxLQ+Z14usMkfOn5nPEMHmLfEB+gAx35tmOSx3u888iYNYIcl4c8HUeEwhjQqMfiJFSHMQuGjMhhIxkUoT0944NR02AULeglIOMW7z+FPAQeBbeGMEWw1AITYuGOeAazbw8aKrha+hHBqVdL4AEYxzYblmv25XfSudxnQRHLPiOtCyY8bRioy/0FTIKCCBKuVPGc2ee10QUrpWvAfLRONI4nMIQCVBh5XDt4l/G6RxZ3HZC2lwzp9rePzxeK4S1Tz+JGohZ0t6A/VB7vQaorn5CwY8CWiJ6mW8xrkmcNR0Gnnyfw4K9nXYM1FO41HZX+j3ZXnJAx02Jl14U6n/BDUU7ocnk5E3ewlfy7KdWy6oMvj2bDXcTRfXzxo1EvRvEW7+9H5Dt4sOO2STn8lXaTq4e+gD3+mgGoL5XZJk493vh6e9Xolkd+FzQiCnIjAcJX3Bv6zpblYXp5f0T9wi+l/ygw=
