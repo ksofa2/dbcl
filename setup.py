@@ -2,11 +2,11 @@ from setuptools import setup
 
 setup(
     name='dbcl',
-    version='0.1.1',
+    version='0.1.2',
     description='A database command line interface that is engine-agnostic.',
     author='Kris Steinhoff',
     url='https://github.com/ksofa2/dbcl',
-    download_url='https://github.com/ksofa2/dbcl/archive/0.1.0.tar.gz',
+    download_url='https://github.com/ksofa2/dbcl/archive/0.1.2.tar.gz',
 
     packages=['dbcl'],
     entry_points={
