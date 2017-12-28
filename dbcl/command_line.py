@@ -90,8 +90,8 @@ def process_comand(cmd, engine, args):
             )
 
             data = [[m[0] for m in column_info_mapping]]
-
             for col in table_info.columns:
+                print(col)
                 data.append(
                     [getattr(col, m[1]) for m in column_info_mapping])
 
