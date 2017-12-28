@@ -8,6 +8,16 @@ setup(
     url='https://github.com/ksofa2/dbcl',
     download_url='https://github.com/ksofa2/dbcl/archive/0.1.3.tar.gz',
 
+    keywords=['db', 'command-line-tool'],
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        'Environment :: Console',
+        'Development Status :: 3 - Alpha',
+        'Topic :: Database',
+        'Topic :: Database :: Front-Ends',
+        'Programming Language :: Python :: 3.6',
+    ],
+
     packages=['dbcl'],
     entry_points={
         'console_scripts': ['dbcl=dbcl.command_line:command_loop'],
