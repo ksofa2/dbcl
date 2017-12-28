@@ -107,9 +107,22 @@ def process_comand(cmd, engine, args):
         print('Bad command "%s"' % cmd)
 
 
-def prompt_for_command(history):
-    return prompt('> ', lexer=PygmentsLexer(SqlLexer),
-                  history=history)
+def prompt_for_command(args, engine, history):
+    try:
+        cmd = prompt('> ', lexer=PygmentsLexer(SqlLexer),
+                     history=history)
+        if cmd.startswith(_command_prefix):
+            process_comand(cmd, engine, args)
+        else:
+            result = engine.execute(cmd)
+            print_result(result)
+    except KeyboardInterrupt:
+        return
+    except EOFError:
+        sys.exit(0)
+    except Exception as e:
+        print(e)
+        return
 
 
 def command_loop():
@@ -118,21 +131,4 @@ def command_loop():
     history = InMemoryHistory()
 
     while True:
-        try:
-            cmd = prompt_for_command(history)
-            if cmd.startswith(_command_prefix):
-                process_comand(cmd, engine, args)
-                continue
-            result = engine.execute(cmd)
-            try:
-                print_data([result.keys()] + [row for row in result])
-            except ResourceClosedError:
-                print('[empty]')
-
-        except KeyboardInterrupt:
-            continue
-        except EOFError:
-            sys.exit(0)
-        except Exception as e:
-            print(e)
-            continue
+        prompt_for_command(args, engine, history)
