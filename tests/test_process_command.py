@@ -1,6 +1,7 @@
 import pytest
 
-from dbcl.command_line import process_command, _command_prefix, NoSuchTableError
+from dbcl.command_line import (process_command, _command_prefix,
+                               NoSuchTableError)
 
 
 @pytest.fixture(autouse=True)
