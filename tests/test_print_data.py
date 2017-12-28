@@ -1,6 +1,6 @@
 import pytest
 
-from dbcl.command_line import print_data
+from dbcl.command_line import print_data, print_result, ResourceClosedError
 
 
 @pytest.mark.parametrize('data,output', (
@@ -18,3 +18,13 @@ def test_good_data(data, output, capsys):
 
     out, err = capsys.readouterr()
     assert out == output
+
+
+def test_closed_resource(mocker, capsys):
+    mock_result = mocker.Mock(side_effect=ResourceClosedError)
+    mock_result.keys = mocker.Mock(side_effect=ResourceClosedError)
+
+    print_result(mock_result)
+
+    out, err = capsys.readouterr()
+    assert out == '[empty]\n'

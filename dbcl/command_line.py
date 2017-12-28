@@ -61,6 +61,13 @@ def print_data(data):
     print(SingleTable(data).table)
 
 
+def print_result(result):
+    try:
+        print_data([result.keys()] + [row for row in result])
+    except ResourceClosedError:
+        print('[empty]')
+
+
 def process_comand(cmd, engine, args):
     cmd_argv = cmd.split()
     if cmd_argv[0] == '%sinfo' % _command_prefix:
