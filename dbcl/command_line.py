@@ -20,6 +20,21 @@ from terminaltables import SingleTable
 _command_prefix = '--/'
 
 
+def prompt_for_url():
+    url_from_env = os.getenv('DATABASE_URL', '')
+    try:
+        input_url = prompt('Connect to [%s]: ' % url_from_env)
+        if len(input_url) > 0:
+            return input_url
+        else:
+            return url_from_env
+
+    except KeyboardInterrupt:
+        sys.exit(1)
+    except EOFError:
+        sys.exit(0)
+
+
 def get_args(arguments):
     # TODO add more details usage info
     parser = argparse.ArgumentParser(description='Connect to a database.')
@@ -28,19 +43,8 @@ def get_args(arguments):
 
     args = parser.parse_args(arguments)
 
-    url_from_env = os.getenv('DATABASE_URL', '')
     while len(args.database_url) == 0:
-        try:
-            input_url = prompt('Connect to [%s]: ' % url_from_env)
-            if len(input_url) > 0:
-                args.database_url = input_url
-            else:
-                args.database_url = url_from_env
-
-        except KeyboardInterrupt:
-            sys.exit(1)
-        except EOFError:
-            sys.exit(0)
+        args.database_url = prompt_for_url()
 
     return args
 
