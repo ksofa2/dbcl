@@ -14,7 +14,7 @@ pip install dbcl
 
 You will also need to install the package needed for your database like `cx_Oracle`, `pg8000` or `PyMySQL`.
 
-Once installed, you can connect to a database by specifying the database URL, [as used by AQLAlchemy](http://docs.sqlalchemy.org/en/latest/core/engines.html), for example:
+Once installed, you can connect to a database by specifying the database URL, [as used by SQLAlchemy](http://docs.sqlalchemy.org/en/latest/core/engines.html), for example:
 
 ```
 dbcl sqlite:///test.db
