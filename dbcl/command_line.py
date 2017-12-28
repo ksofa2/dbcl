@@ -68,41 +68,47 @@ def print_result(result):
         print('[empty]')
 
 
+_column_info_mapping = (
+    ('Column', 'key'),
+    ('Type', 'type'),
+    ('Primary Key', 'primary_key'),
+    ('Index', 'index'),
+    ('Default', 'default'),
+)
+
+
+def process_command_info(info_args, engine, args):
+    # print(info_args)
+    if len(info_args) > 1:
+        print('usage: %sinfo [table_name]' % _command_prefix)
+    elif len(info_args) == 0:
+        print_data(
+            [['Database URL']] + [[args.database_url]])
+
+        metadata = MetaData(engine)
+        metadata.reflect()
+        print_data([['Tables']] + [[t] for t in metadata.tables.keys()])
+    else:
+        try:
+            table_info = Table(info_args[0], MetaData(engine),
+                               autoload=True)
+        except NoSuchTableError as e:
+            print('No such table "%s"' % e)
+            return
+
+        data = [[m[0] for m in _column_info_mapping]]
+        for col in table_info.columns:
+            print(col)
+            data.append(
+                [getattr(col, m[1]) for m in _column_info_mapping])
+
+        print_data(data)
+
+
 def process_command(cmd, engine, args):
     cmd_argv = cmd.split()
     if cmd_argv[0] == '%sinfo' % _command_prefix:
-        if len(cmd_argv) > 2:
-            print('usage: %sinfo [table_name]' % _command_prefix)
-        elif len(cmd_argv) == 1:
-            print_data(
-                [['Database URL']] + [[args.database_url]])
-
-            metadata = MetaData(engine)
-            metadata.reflect()
-            print_data([['Tables']] + [[t] for t in metadata.tables.keys()])
-        else:
-            try:
-                table_info = Table(cmd_argv[1], MetaData(engine),
-                                   autoload=True)
-            except NoSuchTableError as e:
-                print('No such table "%s"' % e)
-                return
-
-            column_info_mapping = (
-               ('Column', 'key'),
-               ('Type', 'type'),
-               ('Primary Key', 'primary_key'),
-               ('Index', 'index'),
-               ('Default', 'default'),
-            )
-
-            data = [[m[0] for m in column_info_mapping]]
-            for col in table_info.columns:
-                print(col)
-                data.append(
-                    [getattr(col, m[1]) for m in column_info_mapping])
-
-            print_data(data)
+        process_command_info(cmd_argv[1:], engine, args)
     else:
         print('Bad command "%s"' % cmd)
 
