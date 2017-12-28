@@ -68,7 +68,7 @@ def print_result(result):
         print('[empty]')
 
 
-def process_comand(cmd, engine, args):
+def process_command(cmd, engine, args):
     cmd_argv = cmd.split()
     if cmd_argv[0] == '%sinfo' % _command_prefix:
         if len(cmd_argv) > 2:
@@ -112,7 +112,7 @@ def prompt_for_command(args, engine, history):
         cmd = prompt('> ', lexer=PygmentsLexer(SqlLexer),
                      history=history)
         if cmd.startswith(_command_prefix):
-            process_comand(cmd, engine, args)
+            process_command(cmd, engine, args)
         else:
             result = engine.execute(cmd)
             print_result(result)

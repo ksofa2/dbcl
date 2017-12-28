@@ -4,7 +4,7 @@ from dbcl.command_line import prompt_for_command
 
 
 def test_prompt_with_command(mocker):
-    mock_process_command = mocker.patch('dbcl.command_line.process_comand')
+    mock_process_command = mocker.patch('dbcl.command_line.process_command')
     mock_get_engine = mocker.patch('dbcl.command_line.get_engine')
     mock_print_result = mocker.patch('dbcl.command_line.print_result')
     mock_prompt = mocker.patch('dbcl.command_line.prompt')
@@ -19,7 +19,7 @@ def test_prompt_with_command(mocker):
 
 
 def test_prompt_with_query(mocker):
-    mock_process_command = mocker.patch('dbcl.command_line.process_comand')
+    mock_process_command = mocker.patch('dbcl.command_line.process_command')
     mock_get_engine = mocker.patch('dbcl.command_line.get_engine')
     mock_print_result = mocker.patch('dbcl.command_line.print_result')
     mock_prompt = mocker.patch('dbcl.command_line.prompt')
