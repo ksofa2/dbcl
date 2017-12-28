@@ -57,10 +57,6 @@ def get_engine(args):
         sys.exit(1)
 
 
-def get_history():
-    return InMemoryHistory()
-
-
 def print_data(data):
     print(SingleTable(data).table)
 
@@ -112,7 +108,7 @@ def prompt_for_command(history):
 def command_loop():
     args = get_args(sys.argv[1:])
     engine = get_engine(args)
-    history = get_history()
+    history = InMemoryHistory()
 
     while True:
         try:
