@@ -2,6 +2,7 @@ from setuptools import setup
 
 setup(
     name='dbcl',
+    version='0.1.0',
     long_description='',
     packages=['dbcl'],
     entry_points={
