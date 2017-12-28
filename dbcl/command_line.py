@@ -57,7 +57,7 @@ def get_engine(args):
         sys.exit(1)
 
 
-def get_history(args):
+def get_history():
     return InMemoryHistory()
 
 
@@ -104,38 +104,32 @@ def process_comand(cmd, engine, args):
         print('Bad command "%s"' % cmd)
 
 
+def prompt_for_command(history):
+    return prompt('> ', lexer=PygmentsLexer(SqlLexer),
+                  history=history)
+
+
 def command_loop():
     args = get_args(sys.argv[1:])
     engine = get_engine(args)
-
-    history = get_history(args)
+    history = get_history()
 
     while True:
         try:
-            cmd = prompt('> ', lexer=PygmentsLexer(SqlLexer),
-                         history=history)
+            cmd = prompt_for_command(history)
+            if cmd.startswith(_command_prefix):
+                process_comand(cmd, engine, args)
+                continue
+            result = engine.execute(cmd)
+            try:
+                print_data([result.keys()] + [row for row in result])
+            except ResourceClosedError:
+                print('[empty]')
+
         except KeyboardInterrupt:
             continue
         except EOFError:
             sys.exit(0)
-
-        if cmd.startswith(_command_prefix):
-            try:
-                process_comand(cmd, engine, args)
-            except Exception as e:
-                print(e)
-            continue
-
-        try:
-            result = engine.execute(cmd)
-        except KeyboardInterrupt:
-            continue
         except Exception as e:
             print(e)
-            continue
-
-        try:
-            print_data([result.keys()] + [row for row in result])
-        except ResourceClosedError:
-            print('[empty]')
             continue
