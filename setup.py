@@ -35,6 +35,5 @@ setup(
     tests_require=[
         'pytest',
         'pytest-mock',
-        'coverage',
     ],
 )
