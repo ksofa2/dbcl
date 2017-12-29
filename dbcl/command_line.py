@@ -78,7 +78,6 @@ _column_info_mapping = (
 
 
 def process_command_info(info_args, engine, args):
-    # print(info_args)
     if len(info_args) > 1:
         print('usage: %sinfo [table_name]' % _command_prefix)
     elif len(info_args) == 0:
@@ -98,7 +97,6 @@ def process_command_info(info_args, engine, args):
 
         data = [[m[0] for m in _column_info_mapping]]
         for col in table_info.columns:
-            print(col)
             data.append(
                 [getattr(col, m[1]) for m in _column_info_mapping])
 
