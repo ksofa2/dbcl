@@ -19,3 +19,9 @@ Once installed, you can connect to a database by specifying the database URL, [a
 ```
 dbcl sqlite:///test.db
 ```
+
+or
+
+```
+dbcl postgresql+pg8000://username:password@127.0.0.1:5432/dbname
+```
