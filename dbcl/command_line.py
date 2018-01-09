@@ -41,6 +41,9 @@ def get_args(arguments):
     parser.add_argument('database_url', metavar='URL', type=str, nargs='?',
                         default='', help='the database URL to connect to')
 
+    parser.add_argument('-r', '--read-only', action='store_true',
+                        help='only allow SELECT queries')
+
     args = parser.parse_args(arguments)
 
     while len(args.database_url) == 0:
@@ -115,6 +118,14 @@ def process_command(cmd, engine, args):
         print('Bad command "%s"' % cmd)
 
 
+def process_query(cmd, engine, args):
+    if args.read_only and cmd.lower().split()[0] != 'select':
+        print('read-only mode: only SELECT queries are allowed')
+    else:
+        result = engine.execute(cmd)
+        print_result(result)
+
+
 def prompt_for_command(args, engine, history):
     try:
         cmd = prompt('> ', lexer=PygmentsLexer(SqlLexer),
@@ -122,8 +133,7 @@ def prompt_for_command(args, engine, history):
         if cmd.startswith(_command_prefix):
             process_command(cmd, engine, args)
         else:
-            result = engine.execute(cmd)
-            print_result(result)
+            process_query(cmd, engine, args)
     except KeyboardInterrupt:
         return
     except EOFError:
@@ -135,6 +145,7 @@ def prompt_for_command(args, engine, history):
 
 def command_loop():
     args = get_args(sys.argv[1:])
+    # print(args); sys.exit(1)
     engine = get_engine(args)
     history = InMemoryHistory()
 
