@@ -15,7 +15,7 @@ def mock_get_engine(mocker):
 
 @pytest.fixture()
 def mock_in_memory_history(mocker):
-    return mocker.patch('dbcl.command_line.InMemoryHistory')
+    return mocker.patch('dbcl.command_line.FileHistory')
 
 
 def test_normal_exit(mock_get_args, mock_get_engine, mock_in_memory_history,
