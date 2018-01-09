@@ -74,6 +74,7 @@ _column_info_mapping = (
     ('Primary Key', 'primary_key'),
     ('Index', 'index'),
     ('Default', 'default'),
+    ('Allow NULL', 'nullable'),
 )
 
 
