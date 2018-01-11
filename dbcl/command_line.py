@@ -103,7 +103,8 @@ def process_command_info(info_args, engine, args):
 
         metadata = MetaData(engine)
         metadata.reflect()
-        print_data([['Tables']] + [[t] for t in metadata.tables.keys()])
+        print_data([['Tables']] + sorted(
+            [[t] for t in metadata.tables.keys()]))
     else:
         _print_table_info(info_args[0], engine)
 
