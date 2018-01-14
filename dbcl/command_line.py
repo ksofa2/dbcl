@@ -65,8 +65,7 @@ def print_result(result):
     try:
         print_data([result.keys()] + [row for row in result])
     except ResourceClosedError:
-        print('[empty]')
-
+        pass
 
 _column_info_mapping = (
     ('Column', 'key'),
