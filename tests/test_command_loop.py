@@ -18,6 +18,20 @@ def mock_in_memory_history(mocker):
     return mocker.patch('dbcl.command_line.FileHistory')
 
 
+def test_bad_connection(mock_get_args, mocker, capsys):
+    mock_create_engine = mocker.patch('dbcl.command_line.create_engine')
+    mock_create_engine.return_value.connect = mocker.MagicMock(
+        side_effect=Exception('connection error'))
+
+    with pytest.raises(SystemExit) as excinfo:
+        command_loop()
+
+    assert excinfo.value.code == 1
+
+    out, err = capsys.readouterr()
+    assert out == 'connection error\n'
+
+
 def test_normal_exit(mock_get_args, mock_get_engine, mock_in_memory_history,
                      mocker):
     mock_prompt = mocker.patch(
