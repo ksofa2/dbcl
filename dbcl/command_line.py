@@ -77,9 +77,9 @@ _column_info_mapping = (
 )
 
 
-def _print_table_info(table, engine):
+def _print_table_info(table, connection):
     try:
-        table_info = Table(table, MetaData(engine),
+        table_info = Table(table, MetaData(connection),
                            autoload=True)
     except NoSuchTableError as e:
         print('No such table "%s"' % e)
@@ -93,37 +93,37 @@ def _print_table_info(table, engine):
     print_data(data)
 
 
-def process_command_info(info_args, engine, args):
+def process_command_info(info_args, connection, args):
     if len(info_args) > 1:
         print('usage: %sinfo [table_name]' % _command_prefix)
     elif len(info_args) == 0:
         print_data(
             [['Database URL']] + [[args.database_url]])
 
-        metadata = MetaData(engine)
+        metadata = MetaData(connection)
         metadata.reflect()
         print_data([['Tables']] + sorted(
             [[t] for t in metadata.tables.keys()]))
     else:
-        _print_table_info(info_args[0], engine)
+        _print_table_info(info_args[0], connection)
 
 
-def process_command(cmd, engine, args):
+def process_command(cmd, connection, args):
     cmd_argv = cmd.split()
     if cmd_argv[0] == '%sinfo' % _command_prefix:
-        process_command_info(cmd_argv[1:], engine, args)
+        process_command_info(cmd_argv[1:], connection, args)
     else:
         print('Bad command "%s"' % cmd)
 
 
-def prompt_for_command(args, engine, history):
+def prompt_for_command(args, connection, history):
     try:
         cmd = prompt('> ', lexer=PygmentsLexer(SqlLexer),
                      history=history)
         if cmd.startswith(_command_prefix):
-            process_command(cmd, engine, args)
+            process_command(cmd, connection, args)
         else:
-            result = engine.execute(cmd)
+            result = connection.execute(cmd)
             print_result(result)
     except KeyboardInterrupt:
         return
@@ -136,8 +136,12 @@ def prompt_for_command(args, engine, history):
 
 def command_loop():
     args = get_args(sys.argv[1:])
-    engine = get_engine(args)
+    try:
+        connection = get_engine(args).connect()
+    except Exception as e:
+        print(e)
+        sys.exit(1)
     history = FileHistory(os.path.expanduser('~/.dbcl_history'))
 
     while True:
-        prompt_for_command(args, engine, history)
+        prompt_for_command(args, connection, history)
