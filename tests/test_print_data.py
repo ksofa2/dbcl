@@ -27,4 +27,4 @@ def test_closed_resource(mocker, capsys):
     print_result(mock_result)
 
     out, err = capsys.readouterr()
-    assert out == '[empty]\n'
+    assert out == ''
