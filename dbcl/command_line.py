@@ -17,7 +17,7 @@ from prompt_toolkit.history import FileHistory
 from terminaltables import SingleTable
 
 
-_command_prefix = '--/'
+_command_prefix = '--'
 
 
 def prompt_for_url():
