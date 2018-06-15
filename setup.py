@@ -30,10 +30,10 @@ setup(
     },
     include_package_data=True,
     install_requires=[
-        'sqlalchemy',
-        'prompt_toolkit',
-        'pygments',
-        'terminaltables',
+        'sqlalchemy==1.2.8',
+        'prompt_toolkit==1.0.15',
+        'pygments==2.2.0',
+        'terminaltables==3.1.0',
     ],
     setup_requires=[
         'pytest-runner',
