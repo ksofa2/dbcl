@@ -45,8 +45,3 @@ Example of a connection to a PostgreSQL database using wht `pg8000` package:
 ```
 dbcl postgresql+pg8000://username:password@127.0.0.1:5432/dbname
 ```
-
-
-## Queries
-
-Once connected
