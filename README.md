@@ -1,7 +1,6 @@
 # dbcl - Database Command Line
 [![Build Status](https://travis-ci.org/ksofa2/dbcl.svg?branch=master)](https://travis-ci.org/ksofa2/dbcl)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e4663675580964433469/maintainability)](https://codeclimate.com/github/ksofa2/dbcl/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/e4663675580964433469/test_coverage)](https://codeclimate.com/github/ksofa2/dbcl/test_coverage)
 
 
 An engine-agnostic database command line interface.
