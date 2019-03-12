@@ -11,7 +11,7 @@ from sqlalchemy.exc import ResourceClosedError, NoSuchTableError
 from pygments.lexers import SqlLexer
 
 from prompt_toolkit.shortcuts import prompt
-from prompt_toolkit.layout.lexers import PygmentsLexer
+from prompt_toolkit.lexers import PygmentsLexer
 
 from prompt_toolkit.history import FileHistory
 from terminaltables import SingleTable

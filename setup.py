@@ -32,7 +32,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'sqlalchemy==1.2.8',
-        'prompt_toolkit==1.0.15',
+        'prompt_toolkit>=2.0.0',
         'pygments>=2.2.0',
         'terminaltables==3.1.0',
     ],
