@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='dbcl',
-    version='0.1.17',
+    version='0.1.19',
     description='A database command line interface that is engine-agnostic.',
     author='Kris Steinhoff',
     url='https://github.com/ksofa2/dbcl',
