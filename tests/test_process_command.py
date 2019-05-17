@@ -64,6 +64,25 @@ def test_info_missing_table(mocker, capsys):
     out, err = capsys.readouterr()
     assert out.startswith('No such table')
 
+def test_exit_no_args(mocker, capsys):
+    mock_args = mocker.MagicMock()
+    mock_args.database_url = 'test_db_url'
+    mock_metadata = mocker.patch('dbcl.command_line.MetaData')
+
+    with pytest.raises(SystemExit) as pytest_wrapped_e:
+            process_command('%sexit' % _command_prefix, None, mock_args)
+    assert pytest_wrapped_e.type == SystemExit
+    assert pytest_wrapped_e.value.code == 0
+
+def test_quit_no_args(mocker, capsys):
+    mock_args = mocker.MagicMock()
+    mock_args.database_url = 'test_db_url'
+    mock_metadata = mocker.patch('dbcl.command_line.MetaData')
+
+    with pytest.raises(SystemExit) as pytest_wrapped_e:
+            process_command('%squit' % _command_prefix, None, mock_args)
+    assert pytest_wrapped_e.type == SystemExit
+    assert pytest_wrapped_e.value.code == 0
 
 @pytest.mark.parametrize('command', (
     '%s%s' % (_command_prefix, cmd) for cmd in
