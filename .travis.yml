@@ -1,12 +1,13 @@
+dist: xenial
 language: python
 env:
   global:
     - secure: m+cuI6p0W3rA+cPS1y9gOkM0ArjFgwZ56QrpA1C6YRCS2cPKjp7gG6qYKXKM+8qinuYZzmRf9ecQzPXGla3i1q7cSBdk0/wZp5THBmJNsZ9OjdOeP9AkKaA3FNXpqpJzeExPLP4h4Xn6H32VADn4lVgTOLhN7aGfMftiR+3/2waXfl6Q/eT3GL5GBfpyTf7hKW2veXNYTNArJn+SRoPP6yM521a9aza92IhKqwYM+X5Z8MpzCqW+62LbZtOKMW4YsVwcgw7yYNf5cZiLGR+WZtBuTIb8LOJ0zKfhz05O4SGhVp8ErzyGhndnG7w4PirBn5xbthUFqyVuokLngMdpAv/3g5X+MZvrBEU9esXNRvMYgYhBBaWES5lbu3saNJlt9306jBGntbnQvJrH1Bx1WIbwQZgxRthtDrxEzxjiV5NTwUQCSzgT04B/D3iZAoUhPFiDmr/0WEurGFCnthvY/XNgMlQOxHe7kFsn0FnlEPvkcFTy5zSeXvCowWL+6dwvedVH352bZVI3e+vQ7fYgBK8ETz8kMYixnFKSiq4wms/2bNrI/1a4eCuviJTsSvYN5iUZVQRQEc7BUca2kgPFG0ss/B3iCmaNOzzixt1Ok/4D8rJiejcgezQ2amwcoiwOTlJNNi7AXyKsOIZ1Jr0q0p6KdUOz1nzTlRYYGLwzfgM=
 python:
   - '2.7'
-  - '3.4'
   - '3.5'
   - '3.6'
+  - '3.7'
 install:
   - pip install .
 before_script:
