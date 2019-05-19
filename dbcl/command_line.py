@@ -112,6 +112,9 @@ def process_command(cmd, connection, args):
     cmd_argv = cmd.split()
     if cmd_argv[0] == '%sinfo' % _command_prefix:
         process_command_info(cmd_argv[1:], connection, args)
+    elif (cmd_argv[0] == '%sexit' % _command_prefix
+            or cmd_argv[0] == '%squit' % _command_prefix):
+        sys.exit(0)
     else:
         print('Bad command "%s"' % cmd)
 
